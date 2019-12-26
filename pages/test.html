@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      .active{
+       background-color: rgb(186, 186, 240);
+      }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- <ul>
+          <li v-for="(m,index) in movies" v-on:click="change(index)" v-bind:key="index" v-bind:class="active === index?'active':''">{{m}}</li>
+        </ul> -->
+        <!-- <button @click="btn1click(1, $event)">按钮1</button> -->  
+        <ul>
+          <li v-for="(m,index) in movies">{{m}}</li>
+        </ul>
+    </div>
+</body>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    
+const app = new Vue({
+  el: '#app',
+  data: {
+   
+    movies:['大熊','喜欢','静香','夏目'],
+    active: null
+  },
+  methods:{
+    
+    change:function(index){
+      this.active = index
+      console.log(this.active)
+    },
+    btn1click(a, b){
+       console.log('btn1click',a, b)
+    }
+  }
+})
+
+</script>
+
+</html>
