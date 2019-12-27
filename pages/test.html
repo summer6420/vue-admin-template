@@ -17,10 +17,28 @@
           <li v-for="(m,index) in movies" v-on:click="change(index)" v-bind:key="index" v-bind:class="active === index?'active':''">{{m}}</li>
         </ul> -->
         <!-- <button @click="btn1click(1, $event)">按钮1</button> -->  
-        <ul>
+        <!-- <ul>
           <li v-for="(m,index) in movies">{{m}}</li>
-        </ul>
-    </div>
+        </ul> -->
+        <!--单选 <label for="agree">
+          <input type="checkbox" id="agree" v-model="isAgree">同意协议
+        </label>
+        <button :disabled="!isAgree">下一步</button> -->
+        <!--多选 <input type="checkbox" value="足球" v-model="hobbies">足球
+        <input type="checkbox" value="篮球" v-model="hobbies">篮球
+        <input type="checkbox" value="乒乓球" v-model="hobbies">乒乓球
+        <input type="checkbox" value="羽毛" v-model="hobbies">羽毛球
+        <h4>我的爱好：{{hobbies}}</h4> -->
+        <!--多选框 <select name="" id="" v-model="furit">
+          <option value="banana">banana</option>
+          <option value="peach">peach</option>
+          <option value="apple">apple</option>
+        </select> -->
+        <label  v-for="item in movies" >
+          <input type="checkbox"  v-model="hobbies" :value="item">{{item}}
+        </label>
+        <h4>我的爱好：{{hobbies}}</h4>
+    </div> 
 </body>
 <script src="../node_modules/vue/dist/vue.js"></script>
 <script>
@@ -28,7 +46,9 @@
 const app = new Vue({
   el: '#app',
   data: {
-   
+    hobbies:[],
+    isAgree: false,
+    furit:'请选择',
     movies:['大熊','喜欢','静香','夏目'],
     active: null
   },
@@ -40,7 +60,7 @@ const app = new Vue({
     },
     btn1click(a, b){
        console.log('btn1click',a, b)
-    }
+    },
   }
 })
 
