@@ -11,15 +11,17 @@
     }
     th,td {
           padding:5px 10px;
+          border: 1px solid #eee;
     }
     th {
-        background-color: chartreuse;
+        background-color: rgb(222, 243, 200);
         font-weight: 600;
     }
     </style>
 </head>
 <body>
-    <div id="#app">
+    <div id="app">
+        <div v-if="books.length">
     <table>
         <thead>
             <tr>
@@ -32,22 +34,57 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="msg in books">
-              {{msg}}
+            <tr v-for="(msg,index) in books">
+                <td>{{msg.id}}</td>
+                <td>{{msg.name}}</td>
+                <td>{{msg.date}}</td>
+                <td>{{'$'+Number(msg.price).toFixed(2)}}</td>
+                <td>
+                    <button @click="msg.valu++">+</button>
+                    {{msg.valu}}
+                    <button v-bind:disabled="msg.valu<=1" @click="msg.valu--">-</button>
+                </td>
+                <td><button @click="del(index)">移除</button></td>
             </tr>
         </tbody>
     </table>
-    <div ></div>
+    <h3>总价格：{{sum.toFixed(2)}}</h3>
+        </div>
+<h1 v-else>购物车已被清空</h1>
 </div>  
 </body>
 <script src="../node_modules/vue/dist/vue.js"></script>
-<script src="../node_modules/vue/dist/vue.runtime.min.js"></script>
-
 <script>
     const app=new Vue({
         el:'#app',
         data:{
-         books:['1','程序员的自我修养','2019-12-26','222','1']
+         books:[
+             {id:'1',name:'程序员的自我修养',date:'2019-12-26',price:'222.00',valu:'1'},
+             {id:'2',name:'程序员的自我',date:'2019-12-26',price:'222.01',valu:'1'},
+             {id:'3',name:'程序员的',date:'2019-12-26',price:'222.00',valu:'1'},
+             {id:'4',name:'程序',date:'2019-12-26',price:'222.05',valu:'1'}
+        ]
+        },
+       
+        computed:{ 
+           sum(){
+               let he=0
+               for(let i=0;i<this.books.length;i++){
+                  he+=this.books[i].price*this.books[i].valu
+               }
+               return he
+           }
+        },
+        methods:{
+            jia(index){
+             console.log(this.books[index].valu++)
+            },
+            jian(index){
+               console.log(this.books[index].valu--)
+            },
+            del(index){
+                this.books.splice(index,1)
+            }
         }
     })
     </script>
